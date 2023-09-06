@@ -3,27 +3,27 @@ import datetime
 from bs4 import BeautifulSoup
 
 
-print(f"""
+print("""
 \033[93m                    ,&OO#O$,             
                  OOO.     (OOO        
                 OO           (OO      
-                OO       OOOO   OO....O
-    OOOO         OO              OO    O
-.OO   OOO        OO,            OO____O 
-&OO       OO%OOOOOOO          OO       
-OO                            .OO      
-#O/                             OO     \033[31m'Hello there, World'
-\033[93m%O*                             (O%   \033[31m-> GitHub : https://github.com/Kardarigan
-\033[93mOO                             OO     \033[31m-> Website : http://qmars.gigfa.com/
-\033[93mOO,                            OO      
-OO%                         (OO       
+                OO       OOOO   OO-----O
+    OOO          OO              OO ...O
+  .OO   OOO      OO,            OO____O 
+ &OO       OO%OOOOOOO          OO       
+ OO                           OO      
+#O                             OO   \033[30m'Hello there, World'
+\033[93m%O            ________        (O%   \033[36m-> GitHub : \033[31mhttps://github.com/Kardarigan
+\033[93mOO           |                 OO   \033[36m-> Website : \033[31mhttp://qmars.gigfa.com/
+\033[93mOO,           |________        OO      
+  OO                         (OO       
     OOOOO                  %OO
-        .OOOOOOOOOOOOOOOO*\033[94m
+        .OOOOOOOOOOOOOOOO*
 """)
 
 
 while True:
-    finalDestination = input('Enter Destination Index : ')
+    finalDestination = input('\033[94mEnter Destination Index : ')
     finalDestination = int(finalDestination)
     finalDestination += 1
     nowTime = datetime.datetime.now()
@@ -35,7 +35,7 @@ while True:
     for pageIntex in range(1, finalDestination):
         url = f'https://musicguitars.ir/page/{pageIntex}/'
         artistNames = [' ابی ', ' اندی ', ' شهره ', 'گوگوش', 'مارتیک']
-        forbiddens = ['ریمیکس','فول','هوش مصنوعی']
+        forbiddens = ['ریمیکس','فول','هوش مصنوعی','گلچین']
 
         try:
             response = requests.get(url)
@@ -48,7 +48,11 @@ while True:
                         aTag = h2Tag.find('a', href=True)
                         aTagLink = aTag['href']
                         aText = aTag.text.strip()
-                        if any(name in aText for name in artistNames) and not(any(name in aText for name in forbiddens)):
+                        if any(name in aText for name in artistNames):
+                            if any(name in aText for name in forbiddens):
+                                print('\033[31mIts Forbiden')
+                            else: 
+                                pass
                             print(f'\033[32mFounded :\033[35m {aText} ---- Page : {pageIntex}')
                             response_article = requests.get(aTagLink)
                             if response_article.status_code == 200:
@@ -85,4 +89,4 @@ while True:
                 print(f'Error : {response.status_code}')
         except requests.exceptions.RequestException as e:
             print(f'Could not Connect: {str(e)}')
-    input("Press 'Enter' Key to Restart...")
+    input("\033[94mPress 'Enter' Key to Restart...")
