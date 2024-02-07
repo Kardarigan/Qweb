@@ -33,7 +33,7 @@ while True:
         pass
 
     for pageIntex in range(1, finalDestination):
-        url = f'https://musicguitars.ir/page/{pageIntex}/'
+        url = f'https://musicgtars.ir/page/{pageIntex}/'
         artistNames = [' ابی ', ' اندی ', ' شهره ', 'گوگوش', 'مارتیک']
         forbiddens = ['ریمیکس','فول','هوش مصنوعی','گلچین']
 
